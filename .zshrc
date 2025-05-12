@@ -1,20 +1,27 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 fcd() {
-local dir
-dir=$(find ${1:-.} -type d -not -path '*/\.*' 2> /dev/null | fzf +m) && cd "$dir"
+  local dir
+  dir=$(find ${1:-.} -type d -not -path '*/\.*' 2> /dev/null | fzf +m) && cd "$dir" 
 }
 
 fzf_favorites() {
-directories=(
-"$HOME/Programming"
+    directories=(
+        "$HOME/Programming"
         "$HOME/Programming/WEBDEV/wt/groupera-dev/groupera-frontend/"
-"$HOME/Programming/WEBDEV/wt/groupera-dev/groupera-backend/"
+        "$HOME/Programming/WEBDEV/wt/groupera-dev/groupera-backend/"
         "$HOME/Programming/iPlug2/iPlug2-cmake/Examples/"
-"$HOME/Dropbox/Devnotes" 
+        "$HOME/Dropbox/Devnotes" 
     )
     selected=$(printf "%s\n" "${directories[@]}" | fzf)
       if [[ -n $selected ]]; then
           cd "$selected"
-fi
+    fi
 }
 zle -N fzf_favorites
 bindkey '^f' fzf_favorites
@@ -29,11 +36,11 @@ export FZF_DEFAULT_OPTS="--multi \
 --marker='♡' \
 --header='CTRL-c or ESC to quit' \
 --color='dark,fg:magenta'"
-
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 # If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
-
+#
+# export PATH=$HOME/bin:/usr/local/bin:$PATH
+alias Qt="cd ~/Programming/Qt"
+alias Backflipper="cd ~/Programming/iPlug2cmake/iPlug2/Examples/Backflipper"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -42,7 +49,7 @@ export ZSH="$HOME/.oh-my-zsh"
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
 ZSH_THEME="robbyrussell"
-
+# ZSH_THEME="powerlevel10k/powerlevel10k"
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
 # a theme from this variable instead of looking in $ZSH/themes/
@@ -105,7 +112,6 @@ ZSH_THEME="robbyrussell"
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(git web-search zsh-autosuggestions zsh-syntax-highlighting fzf)
 
-
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
@@ -133,5 +139,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-alias dotfiles='/usr/bin/git --git-dir=/home/fred/.dotfiles/ --work-tree=/home/fred'
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
