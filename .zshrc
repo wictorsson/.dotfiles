@@ -13,9 +13,6 @@ fcd() {
 fzf_favorites() {
     directories=(
         "$HOME/Programming"
-        "$HOME/Programming/WEBDEV/wt/groupera-dev/groupera-frontend/"
-        "$HOME/Programming/WEBDEV/wt/groupera-dev/groupera-backend/"
-        "$HOME/Programming/iPlug2/iPlug2-cmake/Examples/"
         "$HOME/Dropbox/Devnotes" 
     )
     selected=$(printf "%s\n" "${directories[@]}" | fzf)
