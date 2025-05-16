@@ -8,9 +8,11 @@
 return {
   "AstroNvim/astrocommunity",
   { import = "astrocommunity.pack.lua" },
-  { import = "astrocommunity.colorscheme.catppuccin" },
-  { import = "astrocommunity.colorscheme.gruvbox-nvim" },
+  { import = "astrocommunity.colorscheme.nord-nvim" },
+  { import = "astrocommunity.colorscheme.everforest" },
   { import = "astrocommunity.motion.nvim-surround" },
-  { import = "astrocommunity.recipes.heirline-mode-text-statusline" },
+  { import = "astrocommunity.file-explorer/mini-files" },
+  -- { import = "astrocommunity.recipes.heirline-mode-text-statusline" },
+
   -- import/override with your plugins folder
 }

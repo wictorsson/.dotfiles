@@ -1,4 +1,4 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- AstroLSP allows you to customize the features in AstroNvim's LSP configuration engine
 -- Configuration documentation can be found with `:h astrolsp`
@@ -41,11 +41,18 @@ return {
     -- enable servers that you already have installed without mason
     servers = {
       -- "pyright"
+      "qmlls",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
     config = {
       -- clangd = { capabilities = { offsetEncoding = "utf-8" } },
+      qmlls = {
+        cmd = { vim.fn.expand "~" .. "/Qt/6.9.0/macos/bin/qmlls" },
+        filetypes = { "qml", "qmljs" },
+        root_dir = require("lspconfig.util").root_pattern "pack.pl",
+        single_file_support = true,
+      },
     },
     -- customize how language servers are attached
     handlers = {

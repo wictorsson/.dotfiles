@@ -1,4 +1,4 @@
-if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
+-- if true then return {} end -- WARN: REMOVE THIS LINE TO ACTIVATE THIS FILE
 
 -- You can also add or configure plugins by creating files in this `plugins/` folder
 -- Here are some examples:
@@ -14,7 +14,34 @@ return {
     event = "BufRead",
     config = function() require("lsp_signature").setup() end,
   },
+  -- {
+  --   "peterhoeg/vim-qml",
+  --   event = "BufRead",
+  --   ft = { "qml" },
+  -- },
+  { "sainnhe/gruvbox-material", name = "gruvbox-material", priority = 1000 },
 
+  {
+    "catppuccin/nvim",
+    name = "catppuccin",
+    priority = 1000,
+
+    opts = {
+      -- configurations
+      highlight_overrides = {
+        frappe = function(frappe)
+          return {
+            LineNr = { fg = frappe.overlay1 },
+          }
+        end,
+        mocha = function(mocha)
+          return {
+            LineNr = { fg = mocha.overlay1 },
+          }
+        end,
+      },
+    },
+  },
   -- == Examples of Overriding Plugins ==
 
   -- customize alpha options
