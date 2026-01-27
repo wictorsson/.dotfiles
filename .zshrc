@@ -5,39 +5,9 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-fcd() {
-  local dir
-  dir=$(find ${1:-.} -type d -not -path '*/\.*' 2> /dev/null | fzf +m) && cd "$dir" 
-}
-
-fzf_favorites() {
-    directories=(
-        "$HOME/Programming"
-        "$HOME/Dropbox/Devnotes" 
-    )
-    selected=$(printf "%s\n" "${directories[@]}" | fzf)
-      if [[ -n $selected ]]; then
-          cd "$selected"
-    fi
-}
-zle -N fzf_favorites
-bindkey '^f' fzf_favorites
-export FZF_DEFAULT_OPTS="--multi \
---height=50% \
---margin=5%,2%,2%,5% \
---layout=reverse-list \
---border=double \
---info=inline \
---prompt='$>' \
---pointer='→' \
---marker='♡' \
---header='CTRL-c or ESC to quit' \
---color='dark,fg:magenta'"
 # If you come from bash you might have to change your $PATH.
 #
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-alias Qt="cd ~/Programming/Qt"
-alias Backflipper="cd ~/Programming/iPlug2cmake/iPlug2/Examples/Backflipper"
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
 
@@ -136,8 +106,27 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias Backflipper="cd ~/Programming/iPlug2cmake/iPlug2/Examples/Backflipper"
+alias Devnotes="cd ~/Dropbox/Devnotes"
+alias b="cmake --build build --target vst3 && open ~/Desktop/Live"
 
+bindkey '^F' autosuggest-accept
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+setopt NO_NOMATCH
+?() {
+w3m "https://duckduckgo.com/?q=$(printf '%s+' "$@" | sed 's/+$//')"
+}
+
+y() {
+  local tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+  yazi "$@" --cwd-file="$tmp"
+  if [ -f "$tmp" ] && [ -s "$tmp" ]; then
+    cd "$(cat "$tmp")"
+  fi
+  rm -f "$tmp"
+}
+
