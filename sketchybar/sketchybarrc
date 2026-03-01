@@ -77,14 +77,22 @@ sketchybar --add item front_app left \
 # https://felixkratz.github.io/SketchyBar/config/events
 
 sketchybar --add item clock right \
-           --set clock update_freq=10 icon=  script="$PLUGIN_DIR/clock.sh" \
-           --add item battery right \
-           --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" \
-           icon.drawing=off \
+           --set clock update_freq=10 icon= script="$PLUGIN_DIR/clock.sh"
+
+sketchybar --add item cpu right \
+           --set cpu update_freq=3 script="$PLUGIN_DIR/cpu.sh" label.drawing=off
+
+sketchybar --add item battery right \
+           --set battery update_freq=120 script="$PLUGIN_DIR/battery.sh" icon.drawing=off \
            --subscribe battery system_woke power_source_change
-           # --add item volume right \
-           # --set volume script="$PLUGIN_DIR/volume.sh" \
-           # --subscribe volume volume_change \
- 
+
+sketchybar --add item wifi right \
+           --set wifi script="$PLUGIN_DIR/wifi.sh" label.drawing=off \
+           --subscribe wifi wifi_change
+
+sketchybar --add item volume right \
+           --set volume script="$PLUGIN_DIR/volume.sh" \
+           --subscribe volume volume_change
+  
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update

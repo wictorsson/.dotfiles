@@ -7,22 +7,13 @@ if [ "$PERCENTAGE" = "" ]; then
   exit 0
 fi
 
-case "${PERCENTAGE}" in
-  9[0-9]|100) ICON=""
-  ;;
-  [6-8][0-9]) ICON=""
-  ;;
-  [3-5][0-9]) ICON=""
-  ;;
-  [1-2][0-9]) ICON=""
-  ;;
-  *) ICON=""
-esac
-
-if [[ "$CHARGING" != "" ]]; then
-  ICON=""
+if [ "$PERCENTAGE" -eq 100 ]; then
+  sketchybar --set "$NAME" drawing=off
+  exit 0
 fi
 
-# The item invoking this script (name $NAME) will get its icon and label
-# updated with the current battery status
-sketchybar --set "$NAME" icon="$ICON" label="${PERCENTAGE}%"
+if [[ "$CHARGING" != "" ]]; then
+  sketchybar --set "$NAME" icon="" icon.drawing=on label="${PERCENTAGE}%" drawing=on
+else
+  sketchybar --set "$NAME" icon.drawing=off label="${PERCENTAGE}%" drawing=on
+fi
