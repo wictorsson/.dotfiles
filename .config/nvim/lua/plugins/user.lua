@@ -22,6 +22,17 @@ return {
   { "sainnhe/gruvbox-material", name = "gruvbox-material", priority = 1000 },
 
   {
+    "aiamlucas/dumbtab",
+    main = "dumbtab",
+    lazy = false,
+    priority = 1000,
+    opts = {
+      width = 20, -- left padding (columns)
+      enabled = false, -- start with padding OFF
+    },
+  },
+
+  {
     "catppuccin/nvim",
     name = "catppuccin",
     priority = 1000,

@@ -42,6 +42,7 @@ return {
     servers = {
       -- "pyright"
       "qmlls",
+      "arduino_language_server",
     },
     -- customize language server configuration options passed to `lspconfig`
     ---@diagnostic disable: missing-fields
@@ -52,6 +53,21 @@ return {
         filetypes = { "qml", "qmljs" },
         root_dir = require("lspconfig.util").root_pattern "pack.pl",
         single_file_support = true,
+      },
+      arduino_language_server = {
+        cmd = {
+          "arduino-language-server",
+        },
+        root_dir = function() return vim.loop.cwd() end,
+        filetypes = { "arduino" },
+        capabilities = {
+          textDocument = {
+            semanticTokens = vim.NIL,
+          },
+          workspace = {
+            semanticTokens = vim.NIL,
+          },
+        },
       },
     },
     -- customize how language servers are attached
