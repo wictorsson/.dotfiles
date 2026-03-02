@@ -1,17 +1,9 @@
 #!/bin/sh
 
-update_volume() {
-  MUTED=$(osascript -e 'output muted of (get volume settings)')
+VOLUME=$(osascript -e 'output volume of (get volume settings)')
 
-  if [ "$MUTED" = "true" ]; then
-    sketchybar --set "$NAME" drawing=on icon="󰝟"
-  else
-    sketchybar --set "$NAME" drawing=off
-  fi
-}
-
-case "$SENDER" in
-  "volume_change"|"forced"|"")
-    update_volume
-    ;;
-esac
+if [ "$VOLUME" -eq 0 ]; then
+  sketchybar --set "$NAME" icon="󰝟" icon.color=0xffffffff
+else
+  sketchybar --set "$NAME" icon.color=0x01ffffff
+fi
