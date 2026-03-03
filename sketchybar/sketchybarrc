@@ -90,8 +90,7 @@ sketchybar --add item wifi right \
            --set wifi script="$PLUGIN_DIR/wifi.sh" label.drawing=off icon.font.size=14 \
            --subscribe wifi wifi_change
 
-sketchybar --add item volume right \
-           --set volume update_freq=3 script="$PLUGIN_DIR/volume.sh" label.drawing=off icon.font.size=14
+
   
 ##### Force all scripts to run the first time (never do this in a script) #####
 sketchybar --update
